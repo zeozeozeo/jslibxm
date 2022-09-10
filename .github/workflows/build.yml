@@ -26,7 +26,8 @@ jobs:
       run: ls
       run: uglifyjs build/src/libxm.js src/jslibxm.js -o dist/jslibxm.min.js
     - name: push minified file
+      run: cd /home/runner/work/jslibxm/jslibxm/
       uses: actions-go/push@master
       with:
-        commit-message: '[Auto] update minified file'
+        commit-message: '[Auto] update minified files'
         remote: origin
