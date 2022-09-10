@@ -6,7 +6,11 @@ libxm.onload = function () {
     xmModule = new XMModule(48000, null, updateChannelsText);
 
     var playButton = document.getElementById("play-button");
+    playButton.style.display = "none"
+
     playButton.addEventListener("click", function () {
+        if (!xmModule.isModuleLoaded) return;
+
         if (xmModule.playing) {
             xmModule.pause();
             playButton.textContent = "Play";
@@ -33,6 +37,7 @@ libxm.onload = function () {
                 return;
             }
             playButton.textContent = "Play";
+            playButton.style.display = "block";
         });
     };
     /* if you want to load a module from a URL, just pass
@@ -62,6 +67,7 @@ libxm.onload = function () {
                 return;
             }
             playButton.textContent = "Play";
+            playButton.style.display = "block";
             // hide file input
             inputElement.style.display = "none";
         });
