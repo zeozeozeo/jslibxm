@@ -99,6 +99,7 @@ function XMModule(
     this.xmdata = [];
     this.instrumentsNum = null;
     this.channelsNum = null;
+    this.isModuleLoaded = false;
 
     // only for internal use, use XMModule.load if you want to load modules
     this._loadFromData = function (data, callback) {
@@ -106,6 +107,7 @@ function XMModule(
             function () {
                 if (this.moduleContext !== null) {
                     Module._xm_free_context(this.moduleContext);
+                    this.isModuleLoaded = false;
                     this.moduleContext = null;
                 }
 
@@ -139,16 +141,21 @@ function XMModule(
         }
 
         // success
+        this.isModuleLoaded = true;
+        this.xmdata = [];
+        
+        if (typeof onxmdataupdate == "function") onxmdataupdate();
+        
+        this.instrumentsNum = Module._xm_get_number_of_instruments(
+            this.moduleContext
+        );
+
+        this.channelsNum = Module._xm_get_number_of_channels(
+            this.moduleContext
+        );
+
+        this.pause();
         if (callback instanceof Function) {
-            this.xmdata = [];
-            if (typeof onxmdataupdate == "function") onxmdataupdate();
-            this.instrumentsNum = Module._xm_get_number_of_instruments(
-                this.moduleContext
-            );
-            this.channelsNum = Module._xm_get_number_of_channels(
-                this.moduleContext
-            );
-            this.pause();
             callback(false);
         }
     };
