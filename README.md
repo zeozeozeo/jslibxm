@@ -5,7 +5,7 @@
 jslibxm is a JavaScript `.XM` file (FastTracker II Extended Module) player using [libxm](https://github.com/Artefact2/libxm) with [emscripten](https://emscripten.org/).
 
 -   Very small: ~69,9 kB in size for the minified version
--   Easy to use API (see examples)
+-   Easy to use API (see [examples](https://github.com/zeozeozeo/jslibxm/tree/main/examples))
 -   Fast
 
 # Usage
@@ -43,7 +43,44 @@ libxm.onload = function () {
 
 **WARNING: In most browsers, the AudioContext will only start playing audio when the user interacts when the page (e.g. clicks a button).**
 
-## For more examples, look inside the examples folder.
+## For more examples, look inside the [examples](https://github.com/zeozeozeo/jslibxm/tree/main/examples) folder.
+
+# Documentation
+## `function XMModule(sampleRate = 48000, onfillbuffer, onxmdataupdate)`
+```
+Main constructor. Returns itself.
+ * sampleRate - how much samples to generate and play per second
+ * onfillbuffer - will be called each time when filling new audio buffer
+ * onxmdataupdate - will be called each time when XMModule.xmdata updates
+```
+
+## `XMModule.load(input, callback)`
+```
+Loads an XM module into the context.
+ * {(File|string|Int8Array)} input - loads the module from file, URL or Int8Array.
+
+ * {Function} callback<err> - callback function after module load.
+
+ * Callback has 1 parameter (error) - false if loaded successfully, string if not.
+```
+Example:
+```js
+xm.load(input, function (err) {
+    if (err) {
+        // this condition will run
+        // if there was an an error
+        console.error(err);
+        return;
+    }
+    // module is loaded
+});
+```
+
+## `XMModule.xmdata`
+`XMModule.xmdata` is an array containing all of the events that happening while filling the previous audio buffer.
+
+...unfinished, look into the source code
+
 
 # Building
 
