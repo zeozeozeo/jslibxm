@@ -22,8 +22,12 @@ jobs:
     - name: install uglifyjs
       run: npm install -g uglify-js
     - name: minify files
+      working-directory: /home/runner/work/jslibxm/jslibxm/
       run: |
-        uglifyjs /home/runner/work/jslibxm/jslibxm/build/src/libxm.js /home/runner/work/jslibxm/jslibxm/src/jslibxm.js -o /home/runner/work/jslibxm/jslibxm/dist/jslibxm.min.js
+        ls -la build
+        echo ---------------
+        ls -la build/src
+        uglifyjs build/src/libxm.js src/jslibxm.js -o dist/jslibxm.min.js
     - name: push minified file
       uses: actions-go/push@master
       with:
