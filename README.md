@@ -1,5 +1,7 @@
 # jslibxm - simple JavaScript API for [libxm](https://github.com/Artefact2/libxm)
 
+# [Live demo](https://zeozeozeo.github.io/jslibxm/examples/minimal/)
+
 jslibxm is a JavaScript `.XM` file (FastTracker II Extended Module) player using [libxm](https://github.com/Artefact2/libxm) with [emscripten](https://emscripten.org/).
 
 -   Very small: ~69,9 kB in size for the minified version
