@@ -29,5 +29,4 @@ jobs:
       with:
         commit-message: '[Auto] update build'
         author-name: github-actions
-        author-email: action@github.com
         remote: origin
