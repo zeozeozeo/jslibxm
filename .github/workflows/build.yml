@@ -23,13 +23,11 @@ jobs:
       run: npm install -g uglify-js
     - name: minify files
       working-directory: /home/runner/work/jslibxm/jslibxm/
-      run: |
-        ls -la build
-        echo ---------------
-        ls -la build/src
-        uglifyjs lib/libxm.js src/jslibxm.js -o dist/jslibxm.min.js
+      run: uglifyjs lib/libxm.js src/jslibxm.js -o dist/jslibxm.min.js
     - name: push minified file
       uses: actions-go/push@master
       with:
-        commit-message: '[Auto] update minified files'
+        commit-message: '[Auto] update build'
+        author-name: github-actions
+        author-email: action@github.com
         remote: origin
