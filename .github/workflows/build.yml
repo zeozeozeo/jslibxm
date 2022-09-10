@@ -1,0 +1,28 @@
+name: build and minify
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: mymindstorm/setup-emsdk@v11
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: emscripten build
+      run: make build
+    - name: install uglifyjs
+      run: npm install -g uglify-js
+    - name: minify files
+      run: uglifyjs build/src/libxm.js src/jslibxm.js -o dist/jslibxm.min.js
+    - name: push minified file
+      uses: actions-go/push@master
+      with:
+        commit-message: '[Auto] update minified file'
+        remote: origin
