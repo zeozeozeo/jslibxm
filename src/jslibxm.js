@@ -47,7 +47,7 @@ function XMModule(
     this.XM_BUFFER_LENGTH = 256;
     this.xmdataLengthLimit = 256; // maximum length of this.xmdata
     this.sampleRate = sampleRate;
-    if (this.sampleRate < 1) sampleRate = 1;
+    if (this.sampleRate < 1) this.sampleRate = 1;
 
     // create audio context and two buffers
     this.audioContext = new getAudioContext();
